@@ -1,0 +1,48 @@
+.background {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-body {
+    width: 800px;
+    min-height: 450px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    margin: 8px;
+}
+
+.card-nav-bg {
+    background-color: #27355c;
+    border-radius: 5px 0 0 5px;
+    display: flex;
+    justify-content: center;
+    width: 160px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+}
+
+.navbar button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    margin-bottom: 28px;
+    font-size: 22px;
+    transition: 200ms ease-in-out;
+}
+
+.navbar button:hover {
+    transform: scale(1.2);
+}
+
+.navbar img {
+    height: 80px;
+    width: auto;
+    margin: 8px 0 60px 0;
+}
