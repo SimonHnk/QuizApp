@@ -152,3 +152,9 @@
 .card-body-width {
     width: 100%;
 }
+
+.seperator {
+    height: 1px;
+    width: 70%;
+    background-color: lightgray;
+}

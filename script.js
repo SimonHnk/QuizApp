@@ -22,12 +22,38 @@ let questions = [
         "answer_3": "Ein Input Feld",
         "answer_4": "Text Fett",
         "right_answer": 2
+    },
+    {
+        "question": "Was macht der Tag < br >?",
+        "answer_1": "Text kursiv",
+        "answer_2": "Die Zeile brechen",
+        "answer_3": "Ein Input Feld",
+        "answer_4": "Text Fett",
+        "right_answer": 2
+    },
+    {
+        "question": "Was macht der Tag < br >?",
+        "answer_1": "Text kursiv",
+        "answer_2": "Die Zeile brechen",
+        "answer_3": "Ein Input Feld",
+        "answer_4": "Text Fett",
+        "right_answer": 2
+    },
+    {
+        "question": "Was macht der Tag < br >?",
+        "answer_1": "Text kursiv",
+        "answer_2": "Die Zeile brechen",
+        "answer_3": "Ein Input Feld",
+        "answer_4": "Text Fett",
+        "right_answer": 2
     }
 ];
 
 
 let currentQuestion = 0;
 let correctQuestion = 0;
+let soundSuccess = new Audio('sounds/success.mp3');
+let soundWrong = new Audio('sounds/wrong.mp3');
 
 
 function init() {
@@ -39,41 +65,82 @@ function init() {
 
 
 function showQuestion() {
-    let question = questions[currentQuestion];
-
-    if (currentQuestion >= questions.length) {
-        document.getElementById('card-content-quiz').classList.add('hide');
-        document.getElementById('card-content-endscreen').classList.remove('hide');
-        document.getElementById('final-score').innerHTML = `${correctQuestion}/${questions.length}`;
+    if (gameIsOver()) {
+        showEndscreen();
     } else {
-        let percent = (currentQuestion + 1) / questions.length * 100;
-        
-        document.getElementById('progress-bar').innerHTML = `${percent.toFixed(0)}%`;
-        document.getElementById('progress-bar').style = `width: ${percent.toFixed(0)}%;`;
-
-        document.getElementById('question-text').innerHTML = question.question;
-        document.getElementById('answer_1').innerHTML = question.answer_1;
-        document.getElementById('answer_2').innerHTML = question.answer_2;
-        document.getElementById('answer_3').innerHTML = question.answer_3;
-        document.getElementById('answer_4').innerHTML = question.answer_4;
+        updateProgressbar();
+        showNextQuestion();
     }
 }
 
 
+function gameIsOver() {
+    return currentQuestion >= questions.length;
+}
+
+
+function showEndscreen() {
+    document.getElementById('card-content-quiz').classList.add('hide');
+    document.getElementById('card-content-endscreen').classList.remove('hide');
+    document.getElementById('final-score').innerHTML = `${correctQuestion}/${questions.length}`;
+}
+
+
+function updateProgressbar() {
+    let percent = (currentQuestion + 1) / questions.length * 100;
+
+    document.getElementById('progress-bar').innerHTML = `${percent.toFixed(0)}%`;
+    document.getElementById('progress-bar').style = `width: ${percent.toFixed(0)}%;`;
+}
+
+
+function showNextQuestion() {
+    let question = questions[currentQuestion];
+
+    document.getElementById('question-text').innerHTML = question.question;
+    document.getElementById('answer_1').innerHTML = question.answer_1;
+    document.getElementById('answer_2').innerHTML = question.answer_2;
+    document.getElementById('answer_3').innerHTML = question.answer_3;
+    document.getElementById('answer_4').innerHTML = question.answer_4;
+}
+
+
 function answer(answer) {
-    let answerNumber = answer.slice(-1);
+    let answerNumber = answer.slice(-1); // nimmt nur den letzten Character aus dem String
     let question = questions[currentQuestion];
     let rightAnswer = `answer_${question.right_answer}`
 
     if (answerNumber == question.right_answer) {
-        document.getElementById(answer).parentNode.classList.add('bg-success');
-        correctQuestion++;
+        showRightAnswer(answer);
     } else {
-        document.getElementById(answer).parentNode.classList.add('bg-danger');
-        document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
+        showWrongAnswer(rightAnswer, answer);
     }
-    document.getElementById('next-button').disabled = false;
+    enableButtonNext();
     disableAnswer();
+}
+
+
+function showRightAnswer(answer) {
+    document.getElementById(answer).parentNode.classList.add('bg-success');
+    soundSuccess.play();
+    correctQuestion++;
+}
+
+
+function showWrongAnswer(rightAnswer, answer) {
+    document.getElementById(answer).parentNode.classList.add('bg-danger');
+    document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
+    soundWrong.play();
+}
+
+
+function enableButtonNext() {
+    document.getElementById('next-button').disabled = false;
+}
+
+
+function disableButtonNext() {
+    document.getElementById('next-button').disabled = true;
 }
 
 
@@ -90,10 +157,10 @@ function disableAnswer() {
 
 
 function enableAnswer() {
-    document.getElementById('answer_1').parentNode.onclick = function () {answer('answer_1');};
-    document.getElementById('answer_2').parentNode.onclick = () => {answer('answer_2');};
-    document.getElementById('answer_3').parentNode.onclick = () => {answer('answer_3');};
-    document.getElementById('answer_4').parentNode.onclick = () => {answer('answer_4');};
+    document.getElementById('answer_1').parentNode.onclick = () => { answer('answer_1'); };
+    document.getElementById('answer_2').parentNode.onclick = () => { answer('answer_2'); };
+    document.getElementById('answer_3').parentNode.onclick = () => { answer('answer_3'); };
+    document.getElementById('answer_4').parentNode.onclick = () => { answer('answer_4'); };
     document.getElementById('answer-1').classList.add('answer-container-hover')
     document.getElementById('answer-2').classList.add('answer-container-hover')
     document.getElementById('answer-3').classList.add('answer-container-hover')
@@ -103,9 +170,14 @@ function enableAnswer() {
 
 function nextQuestion() {
     currentQuestion++;
+    disableButtonNext();
+    resetAnswer();
+    enableAnswer();
+    init();
+}
 
-    document.getElementById('next-button').disabled = true;
 
+function resetAnswer() {
     document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_1').parentNode.classList.remove('bg-success');
     document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
@@ -114,7 +186,13 @@ function nextQuestion() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
 
-    enableAnswer();
+
+function restartGame() {
+    currentQuestion = 0;
+    correctQuestion = 0;
+    document.getElementById('card-content-quiz').classList.remove('hide');
+    document.getElementById('card-content-endscreen').classList.add('hide');
     init();
 }
