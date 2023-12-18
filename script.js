@@ -24,27 +24,27 @@ let questions = [
         "right_answer": 2
     },
     {
-        "question": "Was macht der Tag < br >?",
-        "answer_1": "Text kursiv",
-        "answer_2": "Die Zeile brechen",
-        "answer_3": "Ein Input Feld",
-        "answer_4": "Text Fett",
+        "question": "Welches ist die niedrigste Überschriftenebene in HTML?",
+        "answer_1": "< h1 >",
+        "answer_2": "< h3 >",
+        "answer_3": "< h8 >",
+        "answer_4": "< h6 >",
+        "right_answer": 4
+    },
+    {
+        "question": "Wie leitet man einen HTML-Kommentar ein?",
+        "answer_1": "# kommentar",
+        "answer_2": "< !-- kommentar -- >",
+        "answer_3": "// kommentar",
+        "answer_4": "/* kommentar */",
         "right_answer": 2
     },
     {
-        "question": "Was macht der Tag < br >?",
-        "answer_1": "Text kursiv",
-        "answer_2": "Die Zeile brechen",
-        "answer_3": "Ein Input Feld",
-        "answer_4": "Text Fett",
-        "right_answer": 2
-    },
-    {
-        "question": "Was macht der Tag < br >?",
-        "answer_1": "Text kursiv",
-        "answer_2": "Die Zeile brechen",
-        "answer_3": "Ein Input Feld",
-        "answer_4": "Text Fett",
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
         "right_answer": 2
     }
 ];
