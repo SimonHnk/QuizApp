@@ -27,6 +27,7 @@ let questions = [
 
 
 let currentQuestion = 0;
+let correctQuestion = 0;
 
 
 function init() {
@@ -41,8 +42,15 @@ function showQuestion() {
     let question = questions[currentQuestion];
 
     if (currentQuestion >= questions.length) {
-        // Endscreen anzeigen
+        document.getElementById('card-content-quiz').classList.add('hide');
+        document.getElementById('card-content-endscreen').classList.remove('hide');
+        document.getElementById('final-score').innerHTML = `${correctQuestion}/${questions.length}`;
     } else {
+        let percent = (currentQuestion + 1) / questions.length * 100;
+        
+        document.getElementById('progress-bar').innerHTML = `${percent.toFixed(0)}%`;
+        document.getElementById('progress-bar').style = `width: ${percent.toFixed(0)}%;`;
+
         document.getElementById('question-text').innerHTML = question.question;
         document.getElementById('answer_1').innerHTML = question.answer_1;
         document.getElementById('answer_2').innerHTML = question.answer_2;
@@ -59,6 +67,7 @@ function answer(answer) {
 
     if (answerNumber == question.right_answer) {
         document.getElementById(answer).parentNode.classList.add('bg-success');
+        correctQuestion++;
     } else {
         document.getElementById(answer).parentNode.classList.add('bg-danger');
         document.getElementById(rightAnswer).parentNode.classList.add('bg-success');
@@ -69,10 +78,10 @@ function answer(answer) {
 
 
 function disableAnswer() {
-    // document.getElementById('answer_1').parentNode.onclick = null;
-    // document.getElementById('answer_2').parentNode.onclick = null;
-    // document.getElementById('answer_3').parentNode.onclick = null;
-    // document.getElementById('answer_4').parentNode.onclick = null;
+    document.getElementById('answer_1').parentNode.onclick = null;
+    document.getElementById('answer_2').parentNode.onclick = null;
+    document.getElementById('answer_3').parentNode.onclick = null;
+    document.getElementById('answer_4').parentNode.onclick = null;
     document.getElementById('answer-1').classList.remove('answer-container-hover')
     document.getElementById('answer-2').classList.remove('answer-container-hover')
     document.getElementById('answer-3').classList.remove('answer-container-hover')
@@ -81,10 +90,10 @@ function disableAnswer() {
 
 
 function enableAnswer() {
-    // document.getElementById('answer_1').parentNode.onclick = answer('answer_1');
-    // document.getElementById('answer_2').parentNode.onclick = answer('answer_2');
-    // document.getElementById('answer_3').parentNode.onclick = answer('answer_3');
-    // document.getElementById('answer_4').parentNode.onclick = answer('answer_4');
+    document.getElementById('answer_1').parentNode.onclick = function () {answer('answer_1');};
+    document.getElementById('answer_2').parentNode.onclick = () => {answer('answer_2');};
+    document.getElementById('answer_3').parentNode.onclick = () => {answer('answer_3');};
+    document.getElementById('answer_4').parentNode.onclick = () => {answer('answer_4');};
     document.getElementById('answer-1').classList.add('answer-container-hover')
     document.getElementById('answer-2').classList.add('answer-container-hover')
     document.getElementById('answer-3').classList.add('answer-container-hover')
