@@ -1,4 +1,4 @@
-let questions = [
+let questionsHTML = [
     {
         "question": "Wer hat HTML erfunden?",
         "answer_1": "Robbie Williams",
@@ -50,10 +50,168 @@ let questions = [
 ];
 
 
+let questionsCSS = [
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    }
+];
+
+
+let questionsJAVASCRIPT = [
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    }
+];
+
+
+let questionsJAVA = [
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    },
+    {
+        "question": "Wofür steht die Abkürzung DOM?",
+        "answer_1": "Document Object Model",
+        "answer_2": "Data Object Module",
+        "answer_3": "Distribution Object Module",
+        "answer_4": "Document Only Memory",
+        "right_answer": 2
+    }
+];
+
+
+let endscreenQuizname = '';
 let currentQuestion = 0;
 let correctQuestion = 0;
 let soundSuccess = new Audio('sounds/success.mp3');
 let soundWrong = new Audio('sounds/wrong.mp3');
+let questions = questionsHTML;
 
 
 function init() {
@@ -67,6 +225,7 @@ function init() {
 function showQuestion() {
     if (gameIsOver()) {
         showEndscreen();
+        updateProgressbar();
     } else {
         updateProgressbar();
         showNextQuestion();
@@ -81,13 +240,14 @@ function gameIsOver() {
 
 function showEndscreen() {
     document.getElementById('card-content-quiz').classList.add('hide');
+    document.getElementById('endscreen-quizname').innerHTML = `Complete ${endscreenQuizname} Quiz`;
     document.getElementById('card-content-endscreen').classList.remove('hide');
     document.getElementById('final-score').innerHTML = `${correctQuestion}/${questions.length}`;
 }
 
 
 function updateProgressbar() {
-    let percent = (currentQuestion + 1) / questions.length * 100;
+    let percent = (currentQuestion) / questions.length * 100;
 
     document.getElementById('progress-bar').innerHTML = `${percent.toFixed(0)}%`;
     document.getElementById('progress-bar').style = `width: ${percent.toFixed(0)}%;`;
@@ -195,4 +355,59 @@ function restartGame() {
     document.getElementById('card-content-quiz').classList.remove('hide');
     document.getElementById('card-content-endscreen').classList.add('hide');
     init();
+}
+
+
+function selectQuizType(i) {
+    resetMarker();
+    if (i == 0) {
+        questions = questionsHTML;
+        document.getElementById('marker-1').classList.add('nav-marker-show');
+        endscreenQuizname = 'HTML';
+    } else if (i == 1) {
+        questions = questionsCSS;
+        document.getElementById('marker-2').classList.add('nav-marker-show');
+        endscreenQuizname = 'CSS';
+    } else if (i == 2) {
+        questions = questionsJAVASCRIPT;
+        document.getElementById('marker-3').classList.add('nav-marker-show');
+        endscreenQuizname = 'JAVASCRIPT';
+    } else if (i == 3) {
+        questions = questionsJAVA;
+        document.getElementById('marker-4').classList.add('nav-marker-show');
+        endscreenQuizname = 'JAVA';
+    }
+    showQuizScreen();
+    restartGame();
+}
+
+
+function resetMarker() {
+    document.getElementById('marker-1').classList.remove('nav-marker-show');
+    document.getElementById('marker-2').classList.remove('nav-marker-show');
+    document.getElementById('marker-3').classList.remove('nav-marker-show');
+    document.getElementById('marker-4').classList.remove('nav-marker-show');
+}
+
+
+function showQuizScreen() {
+    document.querySelector('.card-content-startscreen').classList.add('hide');
+    document.getElementById('card-content-quiz').classList.remove('hide');
+    document.getElementById('progress-bar-container').classList.remove('hide');
+}
+
+
+function showStartScreen() {
+    document.querySelector('.card-content-startscreen').classList.remove('hide');
+    document.getElementById('card-content-endscreen').classList.add('hide');
+    document.getElementById('card-content-quiz').classList.add('hide');
+    document.getElementById('progress-bar-container').classList.add('hide');
+}
+
+
+function showHighscore() {
+    document.querySelector('.card-content-startscreen').classList.add('hide');
+    document.getElementById('card-content-endscreen').classList.add('hide');
+    document.getElementById('card-content-quiz').classList.add('hide');
+    document.getElementById('progress-bar-container').classList.add('hide');
 }
