@@ -119,6 +119,16 @@
     margin: 8px 0 60px 0;
 }
 
+.progressbar-effect {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 800ms ease-in-out;
+}
+
+.progressbar-effect-show {
+    transform: scaleX(1);
+}
+
 .card-title {
     text-align: center;
     margin-top: 20px !important;
@@ -183,6 +193,41 @@
     gap: 28px;
 }
 
+#card-content-endscreen div {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#card-content-endscreen div form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+#card-content-endscreen div form button {
+    font-size: 16px;
+    padding: 2px 10px;
+}
+
+#card-content-endscreen div form input {
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.15);
+    padding: 2px;
+}
+
+#card-content-endscreen div form input:focus {
+    outline: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#card-content-endscreen div form input::placeholder {
+    padding-left: 5px;
+}
+
 .your-score {
     color: orange;
 }
@@ -213,7 +258,7 @@
 
 .seperator {
     height: 1px;
-    width: 70%;
+    width: 50%;
     background-color: lightgray;
 }
 
@@ -236,4 +281,32 @@
 
 .card-content-startscreen img {
     width: 300px;
+}
+
+.card-content-highscore {
+    min-height: 487px;
+    width: 100%;
+    text-align: center;
+}
+
+.headline-highscore {
+    margin-bottom: 30px;
+}
+
+.highscore-table td {
+    font-size: 18px;
+    font-weight: 600;
+    width: 216px;
+}
+
+.highscore-table {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.table-headline {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    border-bottom: 1px solid black;
 }

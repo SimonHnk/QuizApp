@@ -14,7 +14,7 @@
     <div class="background">
         <div class="header">
             <h3 onclick="showStartScreen()">Start</h3>
-            <h3 onclick="showHighscore()">Bestenliste</h3>
+            <h3 onclick="showHighscore()">Bestenlisten</h3>
         </div>
         <div class="quiz-position">
             <div class="card quiz-body">
@@ -42,18 +42,24 @@
                 <div class="card-body-width">
                     <div class="card-body">
                         <div class="card-content-startscreen">
-                            <h1>Welcome to<br>The awesome Dev Quiz</h1>
-                            <h3>Are YOU ready for the Challange?</h3>
-                            <h4>Choose a type to your left and lets go!</h4>
+                            <h1>Willkommen zum<br>Unglaublichen Dev Quiz</h1>
+                            <h3>Bist DU bereit für die Herausforderung?</h3>
+                            <h4>Wähle ein Quiz zu deiner Linken und leg los!</h4>
                             <img src="./img/coding-icon.png" alt="">
                         </div>
                         <div id="card-content-endscreen" class="hide">
                             <img src="./img/brain result.png">
-                            <h2 id="endscreen-quizname">Complete HTML Quiz</h2>
-                            <span><b class="your-score">YOUR SCORE</b> <b id="final-score">10/10</b></span>
-                            <button class="btn btn-primary">SHARE</button>
-                            <div class="seperator"></div>
-                            <button onclick="restartGame()" class="btn btn-primary">RESTART</button>
+                            <h2 id="endscreen-quizname">HTML Quiz abgeschlossen!</h2>
+                            <span><b class="your-score">Dein Ergebnis</b> <b id="final-score">10/10</b></span>
+                            <button onclick="restartGame()" class="btn btn-primary">Neustarten</button>
+                            <div>
+                                <div class="seperator"></div>
+                                <h4>In Bestenliste eintragen:</h4>
+                                <form onsubmit="setHighscore(); return false;">
+                                    <input id="player-name" type="text" placeholder="Namen eintragen..." required>
+                                    <button class="btn btn-primary">Speichern</button>
+                                </form>
+                            </div>
                         </div>
                         <div id="card-content-quiz" class="hide">
                             <h5 class="card-title" id="question-text">Frage</h5>
@@ -91,15 +97,176 @@
                                     onclick="nextQuestion()" disabled>Weiter</button>
                             </div>
                         </div>
+                        <div class="card-content-highscore hide">
+                            <div>
+                                <h2 class="headline-highscore">Bestenlisten</h2>
+                            </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            HTML Quiz
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <table class="highscore-table">
+                                                <tr>
+                                                    <td class="table-headline">Spieler</td>
+                                                    <td class="table-headline">Punkte</td>
+                                                    <td class="table-headline">Platz</td>
+                                                </tr>
+                                            </table>
+                                            <table class="highscore-table" id="html-highscore">
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#3</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                            CSS Quiz
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <table class="highscore-table">
+                                                <tr>
+                                                    <td class="table-headline">Spieler</td>
+                                                    <td class="table-headline">Punkte</td>
+                                                    <td class="table-headline">Platz</td>
+                                                </tr>
+                                            </table>
+                                            <table class="highscore-table" id="css-highscore">
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#3</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree">
+                                            JAVASCRIPT Quiz
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <table class="highscore-table">
+                                                <tr>
+                                                    <td class="table-headline">Spieler</td>
+                                                    <td class="table-headline">Punkte</td>
+                                                    <td class="table-headline">Platz</td>
+                                                </tr>
+                                            </table>
+                                            <table class="highscore-table" id="javascript-highscore">
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#3</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                            aria-expanded="false" aria-controls="collapseFour">
+                                            JAVA Quiz
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <table class="highscore-table">
+                                                <tr>
+                                                    <td class="table-headline">Spieler</td>
+                                                    <td class="table-headline">Punkte</td>
+                                                    <td class="table-headline">Platz</td>
+                                                </tr>
+                                            </table>
+                                            <table class="highscore-table" id="java-highscore">
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>6/6</td>
+                                                    <td>#3</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="progress-bar-container" class="progress style-bar hide" role="progressbar"
-                        aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                    <div id="progress-bar-container" class="progressbar-effect progress style-bar hide"
+                        role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0"
+                        aria-valuemax="100">
                         <div id="progress-bar" class="progress-bar bg-darkblue" style="width: 25%">25%</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

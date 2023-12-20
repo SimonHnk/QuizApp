@@ -206,12 +206,59 @@ let questionsJAVA = [
 ];
 
 
+let highscoreArray = [
+    {
+        "name": ['Junus der Hacker', 'Junus der Hacker', 'Junus der Hacker', 'Junus der Hacker'],
+        "score": [999, 999, 999, 999, 999],
+        "quiz": ['HTML', 'CSS', 'JAVASCRIPT', 'JAVA'],
+        "place": 0
+    },
+    {
+        "name": [],
+        "score": [],
+        "quiz": [],
+        "place": 1
+    },
+    {
+        "name": [],
+        "score": [],
+        "quiz": [],
+        "place": 2
+    },
+    {
+        "name": ['Hans'],
+        "score": [4],
+        "quiz": ['HTML'],
+        "place": 3
+    },
+    {
+        "name": [],
+        "score": [],
+        "quiz": [],
+        "place": 4
+    },
+    {
+        "name": [],
+        "score": [],
+        "quiz": [],
+        "place": 5
+    },
+    {
+        "name": [],
+        "score": [],
+        "quiz": [],
+        "place": 6
+    }
+];
+
+
 let endscreenQuizname = '';
 let currentQuestion = 0;
 let correctQuestion = 0;
 let soundSuccess = new Audio('sounds/success.mp3');
 let soundWrong = new Audio('sounds/wrong.mp3');
 let questions = questionsHTML;
+loadHighscore();
 
 
 function init() {
@@ -235,14 +282,6 @@ function showQuestion() {
 
 function gameIsOver() {
     return currentQuestion >= questions.length;
-}
-
-
-function showEndscreen() {
-    document.getElementById('card-content-quiz').classList.add('hide');
-    document.getElementById('endscreen-quizname').innerHTML = `Complete ${endscreenQuizname} Quiz`;
-    document.getElementById('card-content-endscreen').classList.remove('hide');
-    document.getElementById('final-score').innerHTML = `${correctQuestion}/${questions.length}`;
 }
 
 
@@ -391,17 +430,32 @@ function resetMarker() {
 
 
 function showQuizScreen() {
+    document.querySelector('.card-content-highscore').classList.add('hide');
     document.querySelector('.card-content-startscreen').classList.add('hide');
     document.getElementById('card-content-quiz').classList.remove('hide');
     document.getElementById('progress-bar-container').classList.remove('hide');
+    setTimeout(() => {
+        document.getElementById('progress-bar-container').classList.add('progressbar-effect-show');
+    }, "500");
 }
 
 
 function showStartScreen() {
+    document.querySelector('.card-content-highscore').classList.add('hide');
     document.querySelector('.card-content-startscreen').classList.remove('hide');
     document.getElementById('card-content-endscreen').classList.add('hide');
     document.getElementById('card-content-quiz').classList.add('hide');
     document.getElementById('progress-bar-container').classList.add('hide');
+    document.getElementById('progress-bar-container').classList.remove('progressbar-effect-show');
+    resetMarker();
+}
+
+
+function showEndscreen() {
+    document.getElementById('card-content-quiz').classList.add('hide');
+    document.getElementById('endscreen-quizname').innerHTML = `${endscreenQuizname} Quiz abgeschlossen!`;
+    document.getElementById('card-content-endscreen').classList.remove('hide');
+    document.getElementById('final-score').innerHTML = `${correctQuestion}/${questions.length}`;
 }
 
 
@@ -410,4 +464,89 @@ function showHighscore() {
     document.getElementById('card-content-endscreen').classList.add('hide');
     document.getElementById('card-content-quiz').classList.add('hide');
     document.getElementById('progress-bar-container').classList.add('hide');
+    document.getElementById('progress-bar-container').classList.remove('progressbar-effect-show');
+    document.querySelector('.card-content-highscore').classList.remove('hide');
+    resetMarker();
+    renderHighscore();
+}
+
+
+function setHighscore() {
+    let playername = document.getElementById('player-name');
+
+    highscoreArray[0].name.push(playername.value);
+    highscoreArray[0].score.push(correctQuestion);
+    highscoreArray[0].quiz.push(endscreenQuizname);
+    playername.value = '';
+    saveHighscore();
+    showHighscore();
+}
+
+
+function saveHighscore() {
+    localStorage.setItem('highscoreArray', JSON.stringify(highscoreArray));
+}
+
+
+function loadHighscore() {
+    if (localStorage.getItem('highscoreArray')) {
+        highscoreArray = JSON.parse(localStorage.getItem('highscoreArray'));
+    }
+}
+
+
+function renderHighscore() {
+    const list0 = document.getElementById('html-highscore');
+    const list1 = document.getElementById('css-highscore');
+    const list2 = document.getElementById('javascript-highscore');
+    const list3 = document.getElementById('java-highscore');
+    list0.innerHTML = '';
+    list1.innerHTML = '';
+    list2.innerHTML = '';
+    list3.innerHTML = '';
+
+    for (let p = 0; p < highscoreArray.length; p++) {
+        const sortByPoints = highscoreArray[p];
+
+        for (let h = 0; h < sortByPoints.name.length; h++) {
+            const playername = sortByPoints.name[h];
+            const score = sortByPoints.score[h];
+            const quiz = sortByPoints.quiz[h];
+            const place = sortByPoints.place;
+
+            if (quiz == 'HTML') {
+                list0.innerHTML += `
+            <tr>
+                <td>${playername}</td>
+                <td>${score}/6</td>
+                <td>#${place}</td>
+            </tr>
+        `;
+            } else if (quiz == 'CSS') {
+                list1.innerHTML += `
+            <tr>
+                <td>${playername}</td>
+                <td>${score}/6</td>
+                <td>#${place}</td>
+            </tr>
+        `;
+            } else if (quiz == 'JAVASCRIPT') {
+                list2.innerHTML += `
+            <tr>
+                <td>${playername}</td>
+                <td>${score}/6</td>
+                <td>#${place}</td>
+            </tr>
+        `;
+            } else if (quiz == 'JAVA') {
+                list3.innerHTML += `
+            <tr>
+                <td>${playername}</td>
+                <td>${score}/6</td>
+                <td>#${place}</td>
+            </tr>
+        `;
+            }
+        }
+    }
 }
