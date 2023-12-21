@@ -211,43 +211,50 @@ let highscoreArray = [
         "name": ['Junus der Hacker', 'Junus der Hacker', 'Junus der Hacker', 'Junus der Hacker'],
         "score": [999, 999, 999, 999, 999],
         "quiz": ['HTML', 'CSS', 'JAVASCRIPT', 'JAVA'],
-        "place": 0
+        "place": 0,
+        "medal": './img/diamond-icon.png'
     },
     {
         "name": [],
         "score": [],
         "quiz": [],
-        "place": 1
+        "place": 1,
+        "medal": './img/gold-icon.png'
     },
     {
         "name": [],
         "score": [],
         "quiz": [],
-        "place": 2
+        "place": 2,
+        "medal": './img/silver-icon.png'
     },
     {
         "name": ['Hans'],
         "score": [4],
         "quiz": ['HTML'],
-        "place": 3
+        "place": 3,
+        "medal": './img/bronze-icon.png'
     },
     {
         "name": [],
         "score": [],
         "quiz": [],
-        "place": 4
+        "place": 4,
+        "medal": './img/wood-icon.png'
     },
     {
         "name": [],
         "score": [],
         "quiz": [],
-        "place": 5
+        "place": 5,
+        "medal": './img/stone-icon.png'
     },
     {
         "name": [],
         "score": [],
         "quiz": [],
-        "place": 6
+        "place": 6,
+        "medal": './img/6th-icon.png'
     }
 ];
 
@@ -474,12 +481,16 @@ function showHighscore() {
 function setHighscore() {
     let playername = document.getElementById('player-name');
 
-    highscoreArray[0].name.push(playername.value);
-    highscoreArray[0].score.push(correctQuestion);
-    highscoreArray[0].quiz.push(endscreenQuizname);
-    playername.value = '';
-    saveHighscore();
-    showHighscore();
+    for (i = 0, a = 6; i < 6, a > 0; i++, a--) {
+        if (correctQuestion === i) {
+            highscoreArray[a].name.push(playername.value);
+            highscoreArray[a].score.push(correctQuestion);
+            highscoreArray[a].quiz.push(endscreenQuizname);
+            playername.value = '';
+            saveHighscore();
+            showHighscore();
+        }
+    }
 }
 
 
@@ -513,13 +524,14 @@ function renderHighscore() {
             const score = sortByPoints.score[h];
             const quiz = sortByPoints.quiz[h];
             const place = sortByPoints.place;
+            const medal = sortByPoints.medal;
 
             if (quiz == 'HTML') {
                 list0.innerHTML += `
             <tr>
                 <td>${playername}</td>
                 <td>${score}/6</td>
-                <td>#${place}</td>
+                <td><img class="place-icon" src="${medal}" alt=""></td>
             </tr>
         `;
             } else if (quiz == 'CSS') {
@@ -527,7 +539,7 @@ function renderHighscore() {
             <tr>
                 <td>${playername}</td>
                 <td>${score}/6</td>
-                <td>#${place}</td>
+                <td><img class="place-icon" src="${medal}" alt=""></td>
             </tr>
         `;
             } else if (quiz == 'JAVASCRIPT') {
@@ -535,7 +547,7 @@ function renderHighscore() {
             <tr>
                 <td>${playername}</td>
                 <td>${score}/6</td>
-                <td>#${place}</td>
+                <td><img class="place-icon" src="${medal}" alt=""></td>
             </tr>
         `;
             } else if (quiz == 'JAVA') {
@@ -543,7 +555,7 @@ function renderHighscore() {
             <tr>
                 <td>${playername}</td>
                 <td>${score}/6</td>
-                <td>#${place}</td>
+                <td><img class="place-icon" src="${medal}" alt=""></td>
             </tr>
         `;
             }
