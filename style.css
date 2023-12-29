@@ -184,6 +184,7 @@
 #card-content-endscreen h2 {
     font-size: 38px;
     font-weight: 700;
+    text-align: center;
 }
 
 #card-content-endscreen span {
@@ -265,6 +266,7 @@
 .card-content-startscreen {
     background-image: url('./img/brainbg.jpg');
     background-size: cover;
+    background-position: center;
     min-height: 487px;
     width: 100%;
     border-radius: 16px;
@@ -314,4 +316,96 @@
 .place-icon {
     width: 16px;
     height: auto;
+}
+
+@media(max-width: 550px) {
+    .card-content-startscreen img {
+        width: 250px;
+    }
+
+    #card-content-endscreen {
+        gap: 14px;
+    }
+
+    #card-content-endscreen img{
+        width: 100px;
+    }
+
+    #card-content-endscreen h2 {
+        transition: 220ms;
+        font-size: 20px;
+    }
+
+    #card-content-endscreen h4 {
+        transition: 220ms;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    #card-content-endscreen span {
+        transition: 220ms;
+        font-size: 14px;
+        text-align: center;
+        gap: 8px;
+    }
+
+    #card-content-endscreen button {
+        font-size: 14px;
+        padding: 6px !important;
+    }
+
+    #card-content-endscreen div form {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #card-content-endscreen div form button {
+        font-size: 14px;
+        padding: 6px !important;
+    }
+}
+
+@media(max-width: 400px) {
+    .answer-container {
+        font-size: 14px;
+        word-break: break-all;
+    }
+
+    .card-content-startscreen img {
+        width: 200px;
+    }
+}
+
+@media(max-width: 370px) {
+    .card-content-startscreen img {
+        width: 150px;
+    }
+
+    .quiz-body {
+        min-height: 100vh !important;
+        border: 0 !important;
+        box-shadow: none;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .card-nav-bg {
+        border-radius: 0;
+    }
+
+    .table-headline {
+        font-size: 16px !important;
+    }
+
+    .highscore-table td {
+        font-size: 14px !important;
+    }
+
+    .header h3 {
+        font-size: 22px;
+    }
+    
+    .navbar button {
+        font-size: 18px;
+    }
 }
