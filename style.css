@@ -403,6 +403,7 @@
 
     .header h3 {
         font-size: 22px;
+        transition: 220ms;
     }
     
     .navbar button {
