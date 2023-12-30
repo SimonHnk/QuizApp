@@ -45,7 +45,7 @@ let questionsHTML = [
         "answer_2": "Data Object Module",
         "answer_3": "Distribution Object Module",
         "answer_4": "Document Only Memory",
-        "right_answer": 2
+        "right_answer": 1
     }
 ];
 
